@@ -1,0 +1,7 @@
+</br>
+<div id='method_menu'>
+  #{Campaigns.a('View', :view, @campaign.id)} | #{Campaigns.a('Delete', :delete, @campaign.id)}
+</div>
+#{render_partial :form, :legendtitle => "Edit Existing Campaign", :goaction => "/campaigns/save", :returnid => @campaign.id}
+<hr size = "1", color = 'grey'>
+<input name='save' type='submit' value='Save' /> or #{Campaigns.a('Cancel', :index)}

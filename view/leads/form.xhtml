@@ -1,0 +1,38 @@
+<?r if session[:showmore] ?>
+  #{
+  form_for(@lead, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.text 'First Name:', :first_name, :size => 30
+    f.text 'Last Name:', :last_name, :size => 30
+    f.text 'Email:', :email, :size => 30
+    f.text 'Phone:', :phone, :size => 10
+    f.select 'Campaign_to:', :campaign_to, :values => ['Select ...'] + Campaign.map(:name), :size => 1, :selected => @lead.campaign_to
+    f.select 'Assigned_to:', :assigned_to, :values => User.map(:email), :size => 1, :selected => @lead.assigned_to
+    f.select 'Status:', :status, :values => @status_map, :size => 1, :selected => @lead.status
+    f.select 'Rating:', :rating, :values => ['*','**','***','****','*****'], :size => 1, :selected => @lead.rating
+    f.select 'Source:', :source, :values => ['Campaign','Cold Call','Tradeshow','Referral','Website'], :size => 1, :selected => @lead.source
+    f.checkbox 'Public', :public, checked = true, :show_value => false
+  end
+  }
+<?r else ?>
+  #{
+  form_for(@lead, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.input_hidden :public
+    f.text 'First Name:', :first_name, :size => 30
+    f.text 'Last Name:', :last_name, :size => 30
+    f.text 'Email:', :email, :size => 30
+    f.text 'Phone:', :phone, :size => 10
+    f.select 'Campaign_to:', :campaign_to, :values => @campaign_map, :size => 1, :selected => @lead.campaign_to
+  end
+  }
+<?r end ?>
+<?r if session[:showmore] ?>
+  #{Leads.a('Show Less', :showmore, @returnid)}
+<?r else ?>    
+  #{Leads.a('Show More', :showmore, @returnid)}
+<?r end ?>

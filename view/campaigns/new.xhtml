@@ -1,0 +1,4 @@
+</br>
+#{render_partial :form, :legendtitle => "Create New Campaign", :goaction => "/campaigns/save", :returnid => 0}
+<hr size = "1", color = 'grey'>
+<input name='save' type='submit' value='Save' /> or #{Campaigns.a('Cancel', :index, @campaign.id)}

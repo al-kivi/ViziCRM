@@ -1,0 +1,34 @@
+<?r if session[:showmore] ?>
+  #{
+  form_for(@account, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.text 'Name:', :name, :size => 30
+    f.text 'Website:', :website
+    f.text 'Phone:', :phone, :size => 10
+    f.text 'EMail:', :email
+    f.select 'Category:', :category, :values => ['Customer', 'Partner', 'Competitor'], :size => 1, :selected => @account.category
+    f.text 'Rating:', :rating, :size => 1
+    f.checkbox 'Public', :public, checked = true, :show_value => false
+  end
+  }
+<?r else ?>
+  #{
+  form_for(@account, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.input_hidden :public
+    f.text 'Name:', :name, :size => 30
+    f.text 'Website:', :website
+    f.text 'Phone:', :phone, :size => 10
+    f.text 'EMail:', :email
+  end
+  }
+<?r end ?>
+<?r if session[:showmore] ?>
+  #{Accounts.a('Show Less', :showmore, @returnid)}
+<?r else ?>    
+  #{Accounts.a('Show More', :showmore, @returnid)}
+<?r end ?>

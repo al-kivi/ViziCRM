@@ -1,0 +1,28 @@
+<?r if !@items.empty? ?>
+  <h3>Recent Items</h3>
+  <?r @items.each do |item| ?>
+    <p>
+      #{item.modeltype.capitalize}:
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <?r if #{item.modeltype} == "account" ?>
+        <?r @link = "#{Accounts.r(:view)}/#{item.item_id}" ?>
+      <?r end ?>
+      <?r if #{item.modeltype} == "campaign" ?>
+        <?r @link = "#{Campaigns.r(:view)}/#{item.item_id}" ?>
+      <?r end ?>
+      <?r if #{item.modeltype} == "contact" ?>
+        <?r @link = "#{Contacts.r(:view)}/#{item.item_id}" ?>
+      <?r end ?>
+      <?r if #{item.modeltype} == "lead" ?>
+        <?r @link = "#{Leads.r(:view)}/#{item.item_id}" ?>
+      <?r end ?>
+      <?r if #{item.modeltype} == "opport" ?>
+        <?r @link = "#{Opports.r(:view)}/#{item.item_id}" ?>
+      <?r end ?>
+      <?r if #{item.modeltype} == "task" ?>
+        <?r @link = "#{Tasks.r(:view)}/#{item.item_id}" ?>
+      <?r end ?>
+      <a href=#{@link}>#{item.itemname[0..20]}</a>
+    </p>
+  <?r end ?>
+<?r end ?>

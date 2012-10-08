@@ -1,0 +1,29 @@
+<?r if !@accounts.empty? ?>
+  <?r @accounts.each do |account| ?>
+    <header>
+      <h1>#{Accounts.a(account.name, :view, account.id)}</h1>
+    </header>
+    <p>
+      Created by: #{account.user.username}
+      &nbsp;&nbsp;
+      Created at: #{account.created_at.strftime('%b-%d-%Y, %H:%M')}
+    </p>
+    <p>
+      No. of contacts: #{Contact.filter(:account_id => account.id).count} &nbsp | &nbsp No. of opportunities: #{Opport.filter(:account_id => account.id).count} &nbsp | &nbsp No. of tasks: #{Task.filter(:account_id => account.id).count}
+    </p>
+    <hr size = "1", color = 'grey'>
+  <?r end ?>
+  
+  <?r if @accounts.respond_to?(:navigation) and @accounts.page_count > 1 ?>
+    #{@accounts.navigation}
+  <?r end ?>
+
+  <br />
+<?r else ?>
+  No accounts were found.
+  <br />
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Accounts.a('New Account', :new)}</p>
+<?r end ?>

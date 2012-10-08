@@ -1,0 +1,19 @@
+<?r @contacts.each do |contact| ?>
+  <header>
+    <h1>Contact: #{Contacts.a(contact.full_name, :view, contact.id)}</h1>
+    <p>
+      Created by: #{contact.user.username}
+      &nbsp;&nbsp;
+      Created at: #{contact.created_at.strftime('%b-%m-%Y, %H:%M')}
+    </p>
+  </header>
+  <hr size = "1", color = 'grey'>
+
+  <?r if @contacts.respond_to?(:navigation) and @contacts.page_count > 1 ?>
+    #{@contacts.navigation}
+  <?r end ?>
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Contacts.a('New Contact', :new)}</p>
+<?r end ?>

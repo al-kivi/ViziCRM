@@ -1,0 +1,7 @@
+</br>
+<div id='method_menu'>
+  #{Opports.a('Edit', :edit, @opport.id)} | #{Opports.a('Delete', :delete, @opport.id)}
+</div>
+#{render_partial :form, :legendtitle => "View Existing Opportunities", :goaction => "view", :returnid => @opport.id}
+<hr size = "1", color = 'grey'>
+<input name='return' type='submit' value='Return' />

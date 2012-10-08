@@ -1,0 +1,8 @@
+<?r if session[:method] == 'index' ?>
+  <h3>Search Campaign</h3>
+  <form name="search" action="/campaigns/index" method="post">
+    <input type="text" name="value" size="10" value=#{@value}>
+  </form>
+<?r end ?>
+
+#{ render_partial :recent_items}

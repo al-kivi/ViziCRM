@@ -1,0 +1,19 @@
+</br>
+<div id='method_menu'>
+  #{Accounts.a('Edit', :edit, @account.id)} | #{Accounts.a('Delete', :delete, @account.id)}
+</div>
+#{render_partial :form, :legendtitle => "View Existing Account",:goaction => "view", :returnid => @account.id}
+<hr size = "1", color = 'grey'>
+<input name='return' type='submit' value='Return' />
+<?r if @tasks.count > 0 ?>
+  <hr size = "1", color = 'grey'>
+  #{render_partial :task_list}
+<?r end ?>
+<?r if @contacts.count > 0 ?>
+  <hr size = "1", color = 'grey'>
+  #{render_partial :contact_list}
+<?r end ?>
+<?r if @opports.count > 0 ?>
+  <hr size = "1", color = 'grey'>
+  #{render_partial :opport_list}
+<?r end ?>

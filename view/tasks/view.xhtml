@@ -1,0 +1,7 @@
+</br>
+<div id='method_menu'>
+  #{Tasks.a('Edit', :edit, @task.id)} | #{Tasks.a('Delete', :delete, @task.id)}
+</div>
+#{render_partial :form, :legendtitle => "View Existing Task", :goaction => "view", :returnid => @task.id}
+<hr size = "1", color = 'grey'>
+<input name='return' type='submit' value='Return' />

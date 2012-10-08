@@ -1,0 +1,27 @@
+<?r if !@leads.empty? ?>
+  <?r @leads.each do |lead| ?>
+    <header>
+      <h1>Status #{lead.status}: #{Leads.a(lead.full_name, :view, lead.id)}</h1>
+    </header>
+    <p>
+      Created by: #{lead.user.username}
+      &nbsp;&nbsp;
+      Created at: #{lead.created_at.strftime('%b-%d-%Y, %H:%M')}
+    </p>
+    <p>
+      Rating: [#{lead.rating}] &nbsp | &nbsp Email: #{lead.email} &nbsp | &nbsp Phone: #{lead.phone} 
+    </p>
+    <hr size = "1", color = 'grey'>
+      
+    <?r if @leads.respond_to?(:navigation) and @leads.page_count > 1 ?>
+      #{@leads.navigation}
+    <?r end ?>
+  <?r end ?>
+<?r else ?>
+  No leads were found.
+  <br />
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Leads.a('New Lead', :new)}</p>
+<?r end ?>

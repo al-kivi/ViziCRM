@@ -1,0 +1,30 @@
+<?r if !@opports.empty? ?>
+  <?r @opports.each do |opport| ?>
+    <header>
+      </br>
+      <b>#{Opports.a(opport.name, :view, opport.id)}</b>
+      at #{opport.account.name}
+    </header>
+    <p>
+      Created by: #{opport.user.username}
+      &nbsp;&nbsp;
+      Created at: #{opport.created_at.strftime('%b-%d-%Y, %H:%M')}
+    </p>
+    <p>
+      Amount: $#{two_dec(opport.amount)} &nbsp | &nbsp with discount of : $#{two_dec(opport.discount)} &nbsp | &nbsp with #{opport.probability}% probability to close
+    </p>
+    <hr size = "1", color = 'grey'>
+
+    <?r if @opports.respond_to?(:navigation) and @opports.page_count > 1 ?>
+      #{@opports.navigation}
+    <?r end ?>
+  <?r end ?>
+  <br />
+<?r else ?>
+  No opports were found.
+  <br />
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Opports.a('New Opport', :new)}</p>
+<?r end ?>

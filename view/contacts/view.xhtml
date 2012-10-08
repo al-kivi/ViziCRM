@@ -1,0 +1,11 @@
+</br>
+<div id='method_menu'>
+  #{Contacts.a('Edit', :edit, @contact.id)} | #{Contacts.a('Delete', :delete, @contact.id)}
+</div>
+#{render_partial :form, :legendtitle => "View Existing Contact", :goaction => "view", :returnid => @contact.id}
+<hr size = "1", color = 'grey'>
+<input name='return' type='submit' value='Return' />
+<?r if @task_count > 0 ?>
+  <hr size = "1", color = 'grey'>
+  #{render_partial :task_list}
+<?r end ?>

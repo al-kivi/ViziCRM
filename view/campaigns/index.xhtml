@@ -1,0 +1,26 @@
+<?r if !@campaigns.empty? ?>
+  <?r @campaigns.each do |campaign| ?>
+    <header>
+      <h1>Status #{campaign.status}: #{Campaigns.a(campaign.name, :view, campaign.id)}</h1>
+    </header>
+    <p>
+      Target: #{campaign.target_leads} leads and $#{two_dec(campaign.target_revenue)} in revenue
+    </p>
+    <p>
+      Actual Revenues: $#{two_dec(Opport.sum_revenue_by_campaign(campaign.id))} &nbsp | &nbsp No. of leads: #{Lead.filter(:campaign_id => campaign.id).count} &nbsp | &nbsp No. of opports: #{Opport.filter(:campaign_id => campaign.id).count}
+    </p>
+    <hr size = "1", color = 'grey'>
+
+    <?r if @campaigns.respond_to?(:navigation) and @campaigns.page_count > 1 ?>
+      #{@campaigns.navigation}
+    <?r end ?>
+  
+  <?r end ?>
+<?r else ?>
+  No campaigns were found.
+  <br />
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Campaigns.a('New Campaign', :new)}</p>
+<?r end ?>

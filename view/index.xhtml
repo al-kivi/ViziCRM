@@ -1,0 +1,20 @@
+<?r if !@actions.empty? ?>
+  <?r @actions.each do |action| ?>
+      <p>
+        <b>#{action.user.username}</b>
+        #{action.actiontype}
+        #{action.modeltype}
+        <b>#{action.itemname}</b>
+        on: #{action.created_at.strftime('%b-%d-%Y, %H:%M')}
+      </p>
+  <?r end ?>
+  
+  <?r if @actions.respond_to?(:navigation) and @actions.page_count > 1 ?>
+    #{@actions.navigation}
+  <?r end ?>
+
+  <br />
+<?r else ?>
+  No actions were found.
+  <br />
+<?r end ?>

@@ -1,0 +1,41 @@
+<?r if session[:showmore] ?>
+  #{
+  form_for(@opport, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.text 'Name:', :name, :size => 30
+    f.select 'Stage:', :stage, :values => ['Prospecting','Presentation','Proposal','Negotiation','Closed/Won','Closed/Lost'], :size => 1, :selected => @opport.stage
+    f.text('Closes_on:', :closes_on, :size => 10, :autocomplete=>"off", :onselect=>"new CalendarDateSelect(this,{year_range:50});", 
+      :onclick=>"new CalendarDateSelect(this,{year_range:50});", :value=>timefmt(@opport.closes_on))
+    f.text 'Probability (%):', :probability, :size => 5, :value=>@opport.probability
+    f.text 'Amount:', :amount, :size => 10, :value=>two_dec(@opport.amount)
+    f.text 'Discount:', :discount, :size => 10
+    f.select 'Assigned_to:', :assigned_to, :values => User.map(:email), :size => 1, :selected => @opport.assigned_to
+    f.select 'Account_to:', :account_to, :values => Account.map(:name), :size => 1, :selected => @opport.account_to
+    f.checkbox 'Public', :public, checked = true, :show_value => @opport.public
+  end
+  }
+<?r else ?>
+  #{
+  form_for(@opport, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.input_hidden :public
+    f.input_hidden :assigned_to
+    f.text 'Name:', :name, :size => 30
+    f.select 'Stage:', :stage, :values => ['Prospecting','Presentation','Proposal','Negotiation','Closed/Won','Closed/Lost'], :size => 1, :selected => @opport.stage
+    f.text('Closes_on:', :closes_on, :size => 10, :autocomplete=>"off", :onselect=>"new CalendarDateSelect(this,{year_range:50});", 
+      :onclick=>"new CalendarDateSelect(this,{year_range:50});", :value=>timefmt(@opport.closes_on))
+    f.text 'Probability (%):', :probability, :size => 5, :value=>@opport.probability
+    f.text 'Amount:', :amount, :size => 10, :value=>two_dec(@opport.amount)
+    f.text 'Discount:', :discount, :size => 10
+  end
+  }
+<?r end ?>
+<?r if session[:showmore] ?>
+  #{Opports.a('Show Less', :showmore, @returnid)}
+<?r else ?>    
+  #{Opports.a('Show More', :showmore, @returnid)}
+<?r end ?>

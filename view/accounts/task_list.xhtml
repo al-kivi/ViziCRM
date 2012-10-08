@@ -1,0 +1,19 @@
+<?r @tasks.each do |task| ?>
+  <header>
+    <h1>Task: #{Tasks.a(task.name, :view, task.id)}</h1>
+    <p>
+      Created by: #{task.user.username}
+      &nbsp;&nbsp;
+      Created at: #{task.created_at.strftime('%b-%m-%Y, %H:%M')}
+    </p>
+  </header>
+  <hr size = "1", color = 'grey'>
+  
+  <?r if @tasks.respond_to?(:navigation) and @tasks.page_count > 1 ?>
+    #{@tasks.navigation}
+  <?r end ?>
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Tasks.a('New Task', :new)}</p>
+<?r end ?>

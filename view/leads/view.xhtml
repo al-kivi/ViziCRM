@@ -1,0 +1,7 @@
+</br>
+<div id='method_menu'>
+  #{Leads.a('Convert', :convert, @lead.id)} | #{Leads.a('Edit', :edit, @lead.id)} | #{Leads.a('Delete', :delete, @lead.id)}
+</div>
+#{render_partial :form, :legendtitle => "View Existing Lead", :goaction => "view", :returnid => @lead.id}
+<hr size = "1", color = 'grey'>
+<input name='return' type='submit' value='Return' />

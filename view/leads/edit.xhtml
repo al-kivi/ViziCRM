@@ -1,0 +1,7 @@
+</br>
+<div id='method_menu'>
+  #{Leads.a('View', :view, @lead.id)} | #{Leads.a('Delete', :delete, @lead.id)}
+</div>
+#{render_partial :form, :legendtitle => "Edit Existing Lead", :goaction => "/leads/save", :returnid => @lead.id}
+<hr size = "1", color = 'grey'>
+<input name='save' type='submit' value='Save' /> or #{Leads.a('Cancel', :index)}

@@ -1,0 +1,38 @@
+<?r if session[:showmore] ?>
+  #{
+  form_for(@campaign, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.text 'Name:', :name, :size => 30
+    f.select 'Status:', :status, :values => ['Planned','Started','Completed', 'On Hold', 'Cancelled'], :size => 1, :selected => @campaign.status
+    f.text('Starts_on:', :starts_on, :size => 10, :autocomplete=>"off", :onselect=>"new CalendarDateSelect(this,{year_range:50});", 
+      :onclick=>"new CalendarDateSelect(this,{year_range:50});", :value=>timefmt(@campaign.starts_on))
+    f.text('Ends_on:', :ends_on, :size => 10, :autocomplete=>"off", :onselect=>"new CalendarDateSelect(this,{year_range:50});", 
+      :onclick=>"new CalendarDateSelect(this,{year_range:50});", :value=>timefmt(@campaign.ends_on))
+    f.text 'Target Leads:', :target_leads, :size => 5
+    f.text 'Target Revenue:', :target_revenue, :size => 10, :value=>two_dec(@campaign.target_revenue)
+    f.checkbox 'Public', :public, checked = true, :show_value => @campaign.public
+  end
+  }
+<?r else ?>
+  #{
+  form_for(@campaign, :method => :post, :action => @goaction) do |f|
+    f.fieldset
+    f.legend @legendtitle
+    f.input_hidden :id
+    f.input_hidden :public
+    f.text 'Name:', :name, :size => 30
+    f.select 'Status:', :status, :values => ['Planned','Started','Completed', 'On Hold', 'Cancelled'], :size => 1, :selected => @campaign.status
+    f.text('Starts_on:', :starts_on, :size => 10, :autocomplete=>"off", :onselect=>"new CalendarDateSelect(this,{year_range:50});", 
+      :onclick=>"new CalendarDateSelect(this,{year_range:50});", :value=>timefmt(@campaign.starts_on))
+    f.text('Ends_on:', :ends_on, :size => 10, :autocomplete=>"off", :onselect=>"new CalendarDateSelect(this,{year_range:50});", 
+      :onclick=>"new CalendarDateSelect(this,{year_range:50});", :value=>timefmt(@campaign.ends_on))
+  end
+  }
+<?r end ?>
+<?r if session[:showmore] ?>
+  #{Campaigns.a('Show Less', :showmore, @returnid)}
+<?r else ?>    
+  #{Campaigns.a('Show More', :showmore, @returnid)}
+<?r end ?>

@@ -1,0 +1,19 @@
+<?r @opports.each do |opport| ?>
+  <header>
+    <h1>Opport: #{Opports.a(opport.name, :view, opport.id)}</h1>
+    <p>
+      Created by: #{opport.user.username}
+      &nbsp;&nbsp;
+      Created at: #{opport.created_at.strftime('%b-%m-%Y, %H:%M')}
+    </p>
+  </header>
+  <hr size = "1", color = 'grey'>
+
+  <?r if @opports.respond_to?(:navigation) and @opports.page_count > 1 ?>
+    #{@opports.navigation}
+  <?r end ?>
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Opports.a('New Opport', :new)}</p>
+<?r end ?>

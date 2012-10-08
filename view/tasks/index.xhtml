@@ -1,0 +1,32 @@
+<?r if !@tasks.empty? ?>
+  <?r @tasks.each do |task| ?>
+    <header>
+      <h1>#{task.status}: #{Tasks.a(task.name, :view, task.id)}</h1>
+    </header>
+    <p>
+      Created by: #{task.user.username}
+      &nbsp;&nbsp;
+      Target due date: #{task.due_at.strftime('%b-%d-%Y')}
+    </p>
+    <p>
+      <?r @diff = ((task.due_at - Time.now)/(60*60*24)).to_i ?>
+      <?r if @diff > 0 ?>
+        Days to due date: &nbsp #{@diff}
+      <?r else ?>
+        Days to due date: &nbsp #{@diff} days overview
+      <?r end ?>
+    </p>
+    <hr size = "1", color = 'grey'>
+
+    <?r if @tasks.respond_to?(:navigation) and @tasks.page_count > 1 ?>
+      #{@tasks.navigation}
+    <?r end ?>
+  <?r end ?>
+<?r else ?>
+  No tasks were found.
+  <br />
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Tasks.a('New Task', :new)}</p>
+<?r end ?>

@@ -1,0 +1,29 @@
+<?r if !@contacts.empty? ?>
+  <?r @contacts.each do |contact| ?>
+    <header>
+      </br>
+      <b>#{Contacts.a(contact.full_name, :view, contact.id)}</b>
+      at #{contact.account.name}
+    </header>
+    <p>
+      Created by: #{contact.user.username}
+      &nbsp;&nbsp;
+      Created at: #{contact.created_at.strftime('%b-%d-%Y, %H:%M')}
+    </p>
+    <p>
+      Email: #{contact.email} &nbsp | &nbsp Phone: #{contact.phone} 
+    </p>
+    <hr size = "1", color = 'grey'>
+
+    <?r if @contacts.respond_to?(:navigation) and @contacts.page_count > 1 ?>
+      #{@contacts.navigation}
+    <?r end ?>
+  <?r end ?>
+<?r else ?>
+  No contacts were found.
+  <br />
+<?r end ?>
+
+<?r if logged_in? ?>
+  <p>#{Contacts.a('New Contact', :new)}</p>
+<?r end ?>
