@@ -1,9 +1,10 @@
 body{
   background:url('../images/bg.png') repeat top left;
+  text-align:center;
 }
 
 #wrapper{  
-  width: 800;  
+  width: 800;
   margin: auto;
   font-family: sans-serif;
 }

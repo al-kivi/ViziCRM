@@ -60,7 +60,7 @@ And the following Gems
 
 ---
 
-* Go to the /apps/vizimusic sub-directory to start up the application
+* Go to the /apps/vizicrm sub-directory to start up the application
 * Enter the following in the terminal command line > ramaze start
 * The administrator can logon with user 'admin' and password 'myadmin' 
 
